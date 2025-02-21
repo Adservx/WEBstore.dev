@@ -23,6 +23,29 @@
     --modal-bg: #2d2d2d;
 }
 
+/* Add system dark mode detection */
+@media (prefers-color-scheme: dark) {
+    html:not([data-theme]) {
+        --bg-color: #1a1a1a;
+        --text-color: #ffffff;
+        --card-bg: #2d2d2d;
+        --card-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        --nav-bg: #2d2d2d;
+        --modal-bg: #2d2d2d;
+    }
+}
+
+@media (prefers-color-scheme: light) {
+    html:not([data-theme]) {
+        --bg-color: #ffffff;
+        --text-color: #333333;
+        --card-bg: #ffffff;
+        --card-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        --nav-bg: #f8f9fa;
+        --modal-bg: #ffffff;
+    }
+}
+
 * {
     margin: 0;
     padding: 0;

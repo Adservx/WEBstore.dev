@@ -138,21 +138,45 @@ function setupSearchFunctionality(isGamesPage) {
     });
 }
 
-// Theme toggle functionality
-function initializeTheme() {
-    const themeToggle = document.getElementById('themeToggle');
-    
-    // Load saved theme
-    const savedTheme = localStorage.getItem('theme') || 'light';
-    document.documentElement.setAttribute('data-theme', savedTheme);
-    themeToggle.checked = savedTheme === 'dark';
+// Theme handling
+const themeToggle = document.getElementById('themeToggle');
+const html = document.documentElement;
 
-    themeToggle.addEventListener('change', () => {
-        const newTheme = themeToggle.checked ? 'dark' : 'light';
-        document.documentElement.setAttribute('data-theme', newTheme);
-        localStorage.setItem('theme', newTheme);
-    });
+// Check system preference
+function getSystemThemePreference() {
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
 }
+
+// Initialize theme based on system preference
+function initializeTheme() {
+    const systemTheme = getSystemThemePreference();
+    const savedTheme = localStorage.getItem('theme');
+    
+    if (savedTheme) {
+        html.setAttribute('data-theme', savedTheme);
+        themeToggle.checked = savedTheme === 'dark';
+    } else {
+        html.removeAttribute('data-theme'); // Use system preference
+        themeToggle.checked = systemTheme === 'dark';
+    }
+}
+
+// Listen for system theme changes
+window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+    if (!localStorage.getItem('theme')) {
+        html.removeAttribute('data-theme');
+        themeToggle.checked = e.matches;
+    }
+});
+
+themeToggle.addEventListener('change', () => {
+    const newTheme = themeToggle.checked ? 'dark' : 'light';
+    html.setAttribute('data-theme', newTheme);
+    localStorage.setItem('theme', newTheme);
+});
+
+// Initialize theme on page load
+initializeTheme();
 
 // Close modal functionality
 document.querySelector('.close-modal').addEventListener('click', () => {
