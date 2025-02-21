@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Games - Web App Store</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <label class="theme-switch">
+            <input type="checkbox" id="themeToggle">
+            <span class="slider round"></span>
+        </label>
+        <nav>
+            <div class="logo">
+                <h1>Web App Store</h1>
+            </div>
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="Search games...">
+                <i class="fas fa-search"></i>
+            </div>
+            <div class="nav-links">
+                <a href="index.html">Apps</a>
+                <a href="games.html" class="active">Games</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <div class="apps-grid" id="gamesContainer">
+            <!-- Games will be dynamically inserted here -->
+        </div>
+    </main>
+
+    <div class="app-modal" id="appModal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div class="app-details">
+                <!-- Game details will be dynamically inserted here -->
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
